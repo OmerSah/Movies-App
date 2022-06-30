@@ -40,11 +40,11 @@ class BookmarksViewController: UIViewController {
 extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MovieListCell else { return MovieListCell() }
-        cell.setMovie(movie: Movies.shared.movies[indexPath.row])
+        //cell.setMovie(movie: )
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Movies.shared.movies.count
+        return 0
     }
 }

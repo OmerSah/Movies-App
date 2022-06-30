@@ -28,7 +28,9 @@ class MovieListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setMovie(movie: Movie) {
+    func setMovie(movie: Movie?) {
+        guard let movie = movie else { return }
+
         self.movie = movie
         
         movieTitleLabel.text = movie.title

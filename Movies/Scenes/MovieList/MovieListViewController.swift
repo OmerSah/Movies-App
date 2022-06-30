@@ -38,11 +38,11 @@ class MovieListViewController: UIViewController {
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MovieListCell else { return MovieListCell() }
-        cell.setMovie(movie: Movies.shared.movies[indexPath.row])
+        cell.setMovie(movie: AppManager.shared.movies[.upcoming]?[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Movies.shared.movies.count
+        return AppManager.shared.movies[.upcoming]?.count ?? 0
     }
 }
