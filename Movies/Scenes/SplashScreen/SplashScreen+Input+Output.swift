@@ -13,5 +13,5 @@ protocol SplashScreenInput: AnyObject {
 
 protocol SplashScreenOutput: AnyObject {
     func createTabBar()
-    func showError(error: MovieError)
+    func showError(error: NetworkError)
 }

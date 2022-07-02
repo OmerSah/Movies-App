@@ -13,6 +13,20 @@ final class SplashScreenViewModel {
     weak var output: SplashScreenOutput?
     
     init() { input = self }
+    
+    private func checkBookmarkedMovies() {
+        let bookmarkedMovies: [Movie] = UserDefaultsManager.shared.get(key: Constants.UserDefaultConstants.favouritesKey)
+        
+        for endpoint in MovieListEndpoint.allCases {
+            for movie in bookmarkedMovies {
+                for i in 0..<(AppManager.shared.movies[endpoint]?.count ?? 0) {
+                    if AppManager.shared.movies[endpoint]?[i].id == movie.id {
+                        AppManager.shared.movies[endpoint]?[i].isFav = true
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension SplashScreenViewModel: SplashScreenInput {
@@ -27,6 +41,7 @@ extension SplashScreenViewModel: SplashScreenInput {
                     AppManager.shared.movies[endpoint] = response.results
                     count += 1
                     if count == endpointCount {
+                        self.checkBookmarkedMovies()
                         self.output?.createTabBar()
                     }
                 case .failure(let error):

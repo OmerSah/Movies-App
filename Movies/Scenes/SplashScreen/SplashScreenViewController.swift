@@ -8,7 +8,6 @@
 import UIKit
 
 class SplashScreenViewController: UIViewController {
-
     private let viewModel: SplashScreenViewModel
     
     init(viewModel: SplashScreenViewModel = .init()) {
@@ -26,8 +25,6 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-    }
-    override func viewDidAppear(_ animated: Bool) {
         viewModel.input?.viewDidLoad()
     }
 }
@@ -52,7 +49,7 @@ extension SplashScreenViewController: SplashScreenOutput {
         present(tabBarController,animated: true)
     }
     
-    func showError(error: MovieError) {
+    func showError(error: NetworkError) {
         print(error.localizedDescription)
     }
 }

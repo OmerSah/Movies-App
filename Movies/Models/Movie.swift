@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Movie: Codable, Hashable {
+    
     let id: Int
     let title: String
     let year: String
@@ -16,6 +17,7 @@ struct Movie: Codable {
     let backdropImage: String
     let overview: String
     let genres: [Int]
+    var isFav = false
     
     private enum CodingKeys: String, CodingKey {
         case id, title, overview

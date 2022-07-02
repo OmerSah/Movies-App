@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MovieError: Error, CustomNSError {
+enum NetworkError: Error, CustomNSError {
     
     case apiError
     case invalidEndpoint
@@ -24,9 +24,4 @@ enum MovieError: Error, CustomNSError {
         case .serializationError: return "Failed to decode data"
         }
     }
-    
-    var errorUserInfo: [String : Any] {
-        [NSLocalizedDescriptionKey: localizedDescription]
-    }
-    
 }

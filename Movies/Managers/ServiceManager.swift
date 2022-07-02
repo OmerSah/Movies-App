@@ -7,12 +7,15 @@
 
 import Foundation
 
-class GenericNetworkService {
+class ServiceManager {
+    static let shared = ServiceManager()
+    private init() {}
+    
     private var dataTask: URLSessionDataTask?
     
     func fetch<T: Codable>(url: URL,
                            params: [String: String]? = nil,
-                           completion: @escaping (Result<T, MovieError>) -> ()) {
+                           completion: @escaping (Result<T, NetworkError>) -> ()) {
         
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             completion(.failure(.invalidEndpoint))
@@ -52,7 +55,6 @@ class GenericNetworkService {
            
             do {
                 let decodedResponse = try JSONDecoder.jsonDecoder.decode(T.self, from: data)
-                //print(decodedResponse)
                 self.executeCompletionHandlerInMainThread(with: .success(decodedResponse), completion: completion)
             } catch {
                 self.executeCompletionHandlerInMainThread(with: .failure(.serializationError), completion: completion)
@@ -61,7 +63,7 @@ class GenericNetworkService {
         dataTask?.resume()
     }
     
-    private func executeCompletionHandlerInMainThread<T: Codable>(with result: Result<T, MovieError>, completion: @escaping (Result<T, MovieError>) -> ()) {
+    private func executeCompletionHandlerInMainThread<T: Codable>(with result: Result<T, NetworkError>, completion: @escaping (Result<T, NetworkError>) -> ()) {
         DispatchQueue.main.async {
             completion(result)
         }

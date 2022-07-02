@@ -11,6 +11,7 @@ class AppManager {
     static let shared = AppManager()
     
     var movies = [MovieListEndpoint: [Movie]]()
+    var genres = [Genre]()
     
     private init() {
         for endpoint in MovieListEndpoint.allCases {

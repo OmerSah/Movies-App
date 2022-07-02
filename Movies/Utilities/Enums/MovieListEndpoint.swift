@@ -7,9 +7,7 @@
 
 import Foundation
 
-enum MovieListEndpoint: String, CaseIterable, Identifiable {
-    
-    var id: String { rawValue }
+enum MovieListEndpoint: String, CaseIterable {
     
     case nowPlaying = "now_playing"
     case upcoming

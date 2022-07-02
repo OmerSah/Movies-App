@@ -8,5 +8,13 @@
 import Foundation
 
 final class BookmarksViewModel {
+    private(set) var favouriteMovies = [Movie]()
     
+    init() {
+        getMoviesFromUserDefaults()
+    }
+    
+    func getMoviesFromUserDefaults() {
+        favouriteMovies = UserDefaultsManager.shared.get(key: Constants.UserDefaultConstants.favouritesKey)
+    }
 }

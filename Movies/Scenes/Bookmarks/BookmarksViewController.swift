@@ -11,7 +11,7 @@ class BookmarksViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         var table = UITableView()
-        table.register(MovieListCell.self, forCellReuseIdentifier: "cell")
+        table.register(BookmarksCell.self, forCellReuseIdentifier: "cell")
         table.delegate = self
         table.dataSource = self
         table.rowHeight = 288
@@ -28,7 +28,15 @@ class BookmarksViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Bookmarks"
         
+        viewModel.getMoviesFromUserDefaults()
+        
         configure()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getMoviesFromUserDefaults()
+        tableView.reloadData()
     }
     
     private func configure() {
@@ -39,12 +47,12 @@ class BookmarksViewController: UIViewController {
 
 extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MovieListCell else { return MovieListCell() }
-        //cell.setMovie(movie: )
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? BookmarksCell else { return BookmarksCell() }
+        cell.setMovie(movie: viewModel.favouriteMovies[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.favouriteMovies.count
     }
 }
