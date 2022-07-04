@@ -12,5 +12,6 @@ extension Constants {
         static let baseAPIURL = "https://api.themoviedb.org/3"
         static let APIKey = "69628a972676cbc7c395c6a05abd700e"
         static let baseImageURL = "https://image.tmdb.org/t/p/w300"
+        static let baseOriginalImageURL = "https://image.tmdb.org/t/p/original"
     }
 }

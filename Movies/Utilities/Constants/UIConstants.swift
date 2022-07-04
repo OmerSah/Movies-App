@@ -17,6 +17,8 @@ extension Constants {
         static let bookmarksTitle = "Bookmarks"
         static let bookmarksTabBarTitle = "Bookmarks"
         
+        static let overviewTitle = "Overview"
+        
         static let splashScreenTitle = "Movies"
         static let creator = "by Ömer Faruk Şahin"
         

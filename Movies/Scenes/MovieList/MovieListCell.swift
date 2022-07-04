@@ -104,7 +104,7 @@ class MovieListCell: UITableViewCell {
         }
         
         movieDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(8)
+            $0.top.equalTo(stackView.snp.bottom).offset(12)
             $0.leading.equalTo(movieImage.snp.trailing).offset(16)
             $0.trailing.equalTo(-16)
         }

@@ -109,6 +109,8 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MovieDetailViewController()
+        vc.setMovie(movie: viewModel.movieForCell(filterStatus: isFiltering,
+                                                  section: indexPath.section, index: indexPath.row))
         navigationController?.pushViewController(vc, animated: true)
     }
 }
