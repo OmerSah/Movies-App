@@ -8,7 +8,7 @@
 import Foundation
 
 struct Genre: Codable {
-    let id: String
+    let id: Int
     let name: String
 }
 

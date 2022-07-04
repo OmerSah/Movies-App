@@ -9,7 +9,6 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
 
-    
     private let viewModel = MovieDetailViewModel()
     
     override func viewDidLoad() {

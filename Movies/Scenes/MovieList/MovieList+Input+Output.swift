@@ -8,9 +8,10 @@
 import Foundation
 
 protocol MovieListInput: AnyObject {
+    func viewWillAppear()
     func numberOfRowsInSection(filterStatus: Bool, section: Int) -> Int
     func titleForHeaderInSection(filterStatus: Bool, section: Int) -> String
-    func bookmarkButtonAction(section: Int, index: Int)
+    func categoriesMenuHandler(title: String)
 }
 
 protocol MovieListOutput: AnyObject {

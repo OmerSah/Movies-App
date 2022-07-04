@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol BookmarksInput: AnyObject {
+    func viewWillAppear()
+}
+
+protocol BookmarksOutput: AnyObject {
+    func refresh()
+}

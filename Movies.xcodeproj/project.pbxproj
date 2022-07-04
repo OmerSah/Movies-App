@@ -24,11 +24,13 @@
 		BA1CB479286F8DE800E7003D /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1CB478286F8DE800E7003D /* UserDefaultsConstants.swift */; };
 		BA1CB47B286FA54200E7003D /* BookmarksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1CB47A286FA54200E7003D /* BookmarksCell.swift */; };
 		BA1CB47D286FAD7700E7003D /* Bookmarks+Input+Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1CB47C286FAD7700E7003D /* Bookmarks+Input+Output.swift */; };
+		BA1CB4802870BCFF00E7003D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BA1CB47F2870BCFF00E7003D /* Kingfisher */; };
 		BA34E35228651178001F04B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA34E35128651178001F04B0 /* AppDelegate.swift */; };
 		BA34E35428651178001F04B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA34E35328651178001F04B0 /* SceneDelegate.swift */; };
 		BA34E35B28651179001F04B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA34E35A28651179001F04B0 /* Assets.xcassets */; };
 		BA34E35E28651179001F04B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA34E35C28651179001F04B0 /* LaunchScreen.storyboard */; };
 		BA34E36A28651279001F04B0 /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA34E36928651279001F04B0 /* MovieListCell.swift */; };
+		BA9C52B128731C8B00D94CF7 /* BookmarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C52B028731C8B00D94CF7 /* BookmarkService.swift */; };
 		BAD4187A2868B7F000D8B11F /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418792868B7F000D8B11F /* MovieListViewController.swift */; };
 		BAD4187C2868BBF000D8B11F /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4187B2868BBEF00D8B11F /* MovieListViewModel.swift */; };
 		BAD4187E2868C24600D8B11F /* MovieList+Input+Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4187D2868C24600D8B11F /* MovieList+Input+Output.swift */; };
@@ -40,6 +42,11 @@
 		BAD4188F286998EA00D8B11F /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4188E286998EA00D8B11F /* SplashScreenViewController.swift */; };
 		BAD4189228699BBE00D8B11F /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4189128699BBE00D8B11F /* BookmarksViewController.swift */; };
 		BAD418942869E3B900D8B11F /* BookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418932869E3B900D8B11F /* BookmarksViewModel.swift */; };
+		BAEAA73E2871A52500D42F6C /* UIMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEAA73D2871A52500D42F6C /* UIMenu.swift */; };
+		BAEAA74428724C0300D42F6C /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEAA74328724C0300D42F6C /* UILabel.swift */; };
+		BAEAA74628725B8000D42F6C /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEAA74528725B8000D42F6C /* UIConstants.swift */; };
+		BAEAA74928727A0800D42F6C /* GenreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEAA74828727A0800D42F6C /* GenreLabel.swift */; };
+		BAEAA74B28728F0E00D42F6C /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEAA74A28728F0E00D42F6C /* UIStackView+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +74,7 @@
 		BA34E35D28651179001F04B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA34E35F28651179001F04B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA34E36928651279001F04B0 /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
+		BA9C52B028731C8B00D94CF7 /* BookmarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkService.swift; sourceTree = "<group>"; };
 		BAD418792868B7F000D8B11F /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		BAD4187B2868BBEF00D8B11F /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		BAD4187D2868C24600D8B11F /* MovieList+Input+Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieList+Input+Output.swift"; sourceTree = "<group>"; };
@@ -77,6 +85,11 @@
 		BAD4188E286998EA00D8B11F /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		BAD4189128699BBE00D8B11F /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 		BAD418932869E3B900D8B11F /* BookmarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewModel.swift; sourceTree = "<group>"; };
+		BAEAA73D2871A52500D42F6C /* UIMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMenu.swift; sourceTree = "<group>"; };
+		BAEAA74328724C0300D42F6C /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		BAEAA74528725B8000D42F6C /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		BAEAA74828727A0800D42F6C /* GenreLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreLabel.swift; sourceTree = "<group>"; };
+		BAEAA74A28728F0E00D42F6C /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA1CB4802870BCFF00E7003D /* Kingfisher in Frameworks */,
 				BAD418882868C86F00D8B11F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				BA011BF1286B5B08001409C2 /* MovieService.swift */,
+				BA9C52B028731C8B00D94CF7 /* BookmarkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -114,6 +129,7 @@
 				BA011C05286D24C3001409C2 /* Constants.swift */,
 				BA011C07286D24F1001409C2 /* APIConstants.swift */,
 				BA1CB478286F8DE800E7003D /* UserDefaultsConstants.swift */,
+				BAEAA74528725B8000D42F6C /* UIConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -164,15 +180,15 @@
 		BA34E35028651178001F04B0 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
-				BA071719286DD852002A2BC3 /* Resources */,
+				BA34E35F28651179001F04B0 /* Info.plist */,
 				BA011C09286D2918001409C2 /* Managers */,
 				BA011BEC286B3E7B001409C2 /* Services */,
-				BAD418822868C80B00D8B11F /* Utilities */,
 				BAD4187F2868C28A00D8B11F /* Models */,
 				BA34E36528651215001F04B0 /* Scenes */,
+				BAEAA747287279C900D42F6C /* Views */,
+				BAD418822868C80B00D8B11F /* Utilities */,
 				BA071718286DD803002A2BC3 /* Supports */,
-				BA34E35C28651179001F04B0 /* LaunchScreen.storyboard */,
-				BA34E35F28651179001F04B0 /* Info.plist */,
+				BA071719286DD852002A2BC3 /* Resources */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -180,6 +196,7 @@
 		BA34E36528651215001F04B0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				BA34E35C28651179001F04B0 /* LaunchScreen.storyboard */,
 				BAD4189028699B9100D8B11F /* Bookmarks */,
 				BAD4188D2869989A00D8B11F /* SplashScreen */,
 				BAD418782868B75B00D8B11F /* MovieDetail */,
@@ -234,6 +251,7 @@
 				BAD418842868C82E00D8B11F /* UIView+Ext.swift */,
 				BA011BF5286B5C71001409C2 /* DateFormatter+Ext.swift */,
 				BA011BF7286B5CE7001409C2 /* JSONDecoder+Ext.swift */,
+				BAEAA74A28728F0E00D42F6C /* UIStackView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -259,6 +277,16 @@
 			path = Bookmarks;
 			sourceTree = "<group>";
 		};
+		BAEAA747287279C900D42F6C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BAEAA73D2871A52500D42F6C /* UIMenu.swift */,
+				BAEAA74328724C0300D42F6C /* UILabel.swift */,
+				BAEAA74828727A0800D42F6C /* GenreLabel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -277,6 +305,7 @@
 			name = Movies;
 			packageProductDependencies = (
 				BAD418872868C86F00D8B11F /* SnapKit */,
+				BA1CB47F2870BCFF00E7003D /* Kingfisher */,
 			);
 			productName = Movies;
 			productReference = BA34E34E28651178001F04B0 /* Movies.app */;
@@ -308,6 +337,7 @@
 			mainGroup = BA34E34528651178001F04B0;
 			packageReferences = (
 				BAD418862868C86F00D8B11F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				BA1CB47E2870BCFF00E7003D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = BA34E34F28651178001F04B0 /* Products */;
 			projectDirPath = "";
@@ -336,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD418942869E3B900D8B11F /* BookmarksViewModel.swift in Sources */,
+				BAEAA74428724C0300D42F6C /* UILabel.swift in Sources */,
 				BA011C06286D24C3001409C2 /* Constants.swift in Sources */,
 				BA011BF8286B5CE7001409C2 /* JSONDecoder+Ext.swift in Sources */,
 				BA1CB47D286FAD7700E7003D /* Bookmarks+Input+Output.swift in Sources */,
@@ -349,17 +380,22 @@
 				BA1CB479286F8DE800E7003D /* UserDefaultsConstants.swift in Sources */,
 				BA011C0D286D3816001409C2 /* SplashScreenViewModel.swift in Sources */,
 				BAD418812868C29A00D8B11F /* Movie.swift in Sources */,
+				BA9C52B128731C8B00D94CF7 /* BookmarkService.swift in Sources */,
+				BAEAA74B28728F0E00D42F6C /* UIStackView+Ext.swift in Sources */,
 				BA011BF2286B5B08001409C2 /* MovieService.swift in Sources */,
 				BAD4189228699BBE00D8B11F /* BookmarksViewController.swift in Sources */,
 				BA1CB47B286FA54200E7003D /* BookmarksCell.swift in Sources */,
+				BAEAA73E2871A52500D42F6C /* UIMenu.swift in Sources */,
 				BAD418852868C82E00D8B11F /* UIView+Ext.swift in Sources */,
 				BA011BFD286B5E2C001409C2 /* NetworkError.swift in Sources */,
 				BA011C0B286D2927001409C2 /* AppManager.swift in Sources */,
 				BA011C08286D24F1001409C2 /* APIConstants.swift in Sources */,
 				BA011C0F286D3832001409C2 /* SplashScreen+Input+Output.swift in Sources */,
 				BAD4188C2868E70C00D8B11F /* MovieDetailViewModel.swift in Sources */,
+				BAEAA74628725B8000D42F6C /* UIConstants.swift in Sources */,
 				BA011BFF286B7103001409C2 /* Response.swift in Sources */,
 				BAD4188A2868E6D000D8B11F /* MovieDetailViewController.swift in Sources */,
+				BAEAA74928727A0800D42F6C /* GenreLabel.swift in Sources */,
 				BA34E36A28651279001F04B0 /* MovieListCell.swift in Sources */,
 				BA1CB477286F777400E7003D /* UserDefaultsManager.swift in Sources */,
 				BA011C03286D22C7001409C2 /* ServiceManager.swift in Sources */,
@@ -580,6 +616,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BA1CB47E2870BCFF00E7003D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		BAD418862868C86F00D8B11F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -591,6 +635,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BA1CB47F2870BCFF00E7003D /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA1CB47E2870BCFF00E7003D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		BAD418872868C86F00D8B11F /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BAD418862868C86F00D8B11F /* XCRemoteSwiftPackageReference "SnapKit" */;

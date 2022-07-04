@@ -13,15 +13,26 @@ final class MovieListViewModel {
     weak var input: MovieListInput?
     
     private(set) var filteredMovies = [MovieListEndpoint: [Movie]]()
+    private var categorizedMovies = [MovieListEndpoint: [Movie]]()
     
-    init() { input = self }
+    let genres = ["All"] + AppManager.shared.genres.map( { $0.name } )
+    private var selectedGenreID = 0
+    
+    private let bookmarkService = BookmarkService.shared
+    private let appManager = AppManager.shared
+    private let endpoints = MovieListEndpoint.allCases
+    private let userDefaults = UserDefaultsManager.shared
+    
+    init() {
+        input = self
+        categorizedMovies = appManager.movies
+    }
     
     func searchMovie(title: String) {
         filteredMovies = [MovieListEndpoint: [Movie]]()
-        for endpoint in MovieListEndpoint.allCases {
+        for endpoint in endpoints {
             filteredMovies[endpoint] = [Movie]()
-            filteredMovies[endpoint] = AppManager.shared.movies[endpoint]?.filter( { $0.title.lowercased().contains(title.lowercased()) } )
-            print(filteredMovies[endpoint]!.map({ $0.title }))
+            filteredMovies[endpoint] = categorizedMovies[endpoint]?.filter( { $0.title.lowercased().contains(title.lowercased()) } )
         }
         output?.refresh()
     }
@@ -29,46 +40,80 @@ final class MovieListViewModel {
     func movieForCell(filterStatus: Bool, section: Int, index: Int) -> Movie? {
         let movie: Movie?
         if filterStatus {
-            movie = filteredMovies[MovieListEndpoint.allCases[section]]?[index]
+            movie = filteredMovies[endpoints[section]]?[index]
         } else {
-            movie = AppManager.shared.movies[MovieListEndpoint.allCases[section]]?[index]
+            movie = categorizedMovies[endpoints[section]]?[index]
         }
         return movie
     }
+    
+    func updateBookMarkedMovies() {
+        filteredMovies = bookmarkService.updateBookmarkedMovies(in: filteredMovies)
+        appManager.movies = bookmarkService.updateBookmarkedMovies(in: appManager.movies)
+        updateCategorizedMovies()
+    }
+    
+    func updateCategorizedMovies() {
+        if selectedGenreID != 0 {
+            for endpoint in endpoints {
+                categorizedMovies[endpoint] = [Movie]()
+                for movie in appManager.movies[endpoint] ?? [Movie]() {
+                    if movie.genres.contains(where: { $0 == selectedGenreID } ) {
+                        categorizedMovies[endpoint]? += [movie]
+                    }
+                }
+            }
+        } else {
+            categorizedMovies = appManager.movies
+        }
+    }
+    
 }
 
 extension MovieListViewModel: MovieListInput {
-    func bookmarkButtonAction(section: Int, index: Int) {
-        guard let movie = AppManager.shared.movies[MovieListEndpoint.allCases[section]]?[index] else { return }
-        var movies: [Movie] = UserDefaultsManager.shared.get(key: Constants.UserDefaultConstants.favouritesKey)
-        AppManager.shared.movies[MovieListEndpoint.allCases[section]]![index].isFav = !movie.isFav
-                                 
+    func viewWillAppear() {
+        updateBookMarkedMovies()
+        output?.refresh()
+    }
+    
+    func bookmarkButtonAction(filterStatus: Bool, section: Int, index: Int) {
+        var movies: [Movie] = bookmarkService.getBookmarkedMovies()
+        
+        guard let movie = movieForCell(filterStatus: filterStatus, section: section, index: index)
+            else { return }
+        
         if !movie.isFav  {
-            if !movies.contains(movie) {
+            if !movies.contains(where: { $0.id == movie.id }) {
                 movies = movies + [movie]
             }
-            UserDefaultsManager.shared.set(items: movies,
-                                           key: Constants.UserDefaultConstants.favouritesKey)
-            
+            bookmarkService.setBookmarkedMovies(movies: movies)
         } else {
             movies = movies.filter( { $0.id != movie.id } )
-            UserDefaultsManager.shared.set(items: movies,
-                                           key: Constants.UserDefaultConstants.favouritesKey)
+            bookmarkService.setBookmarkedMovies(movies: movies)
         }
+        
+        updateBookMarkedMovies()
         output?.refresh()
     }
     
     func titleForHeaderInSection(filterStatus: Bool, section: Int) -> String {
-        if filterStatus && filteredMovies[MovieListEndpoint.allCases[section]]?.count == 0 {
-            return MovieListEndpoint.allCases[section].description + " (No Results Found)"
+        if categorizedMovies[endpoints[section]]?.count == 0
+            || (filterStatus &&  filteredMovies[endpoints[section]]?.count == 0) {
+            return endpoints[section].description + " (No Results Found)"
         }
-        return MovieListEndpoint.allCases[section].description
+        return endpoints[section].description
     }
     
     func numberOfRowsInSection(filterStatus: Bool, section: Int) -> Int {
         if filterStatus {
-            return filteredMovies[MovieListEndpoint.allCases[section]]?.count ?? 0
+            return filteredMovies[endpoints[section]]?.count ?? 0
         }
-        return AppManager.shared.movies[MovieListEndpoint.allCases[section]]?.count ?? 0
+        return categorizedMovies[endpoints[section]]?.count ?? 0
+    }
+    
+    func categoriesMenuHandler(title: String) {
+        selectedGenreID = appManager.genres.filter( { $0.name == title } ).first?.id ?? 0
+        updateCategorizedMovies()
+        output?.refresh()
     }
 }

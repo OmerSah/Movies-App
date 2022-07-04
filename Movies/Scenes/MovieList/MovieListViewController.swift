@@ -11,7 +11,7 @@ class MovieListViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
         var table = UITableView()
-        table.register(MovieListCell.self, forCellReuseIdentifier: "cell")
+        table.register(MovieListCell.self, forCellReuseIdentifier: Constants.UIConstants.movieListCellID)
         table.delegate = self
         table.dataSource = self
         table.rowHeight = 288
@@ -22,28 +22,37 @@ class MovieListViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Movies..."
+        searchController.searchBar.placeholder = Constants.UIConstants.searchBarPlaceholder
         definesPresentationContext = true
         return searchController
     }()
     
-    private let viewModel = MovieListViewModel()
+    private lazy var categoriesMenu: UIMenu = .init(menuTitle: Constants.UIConstants.categoriesMenuTitle, titles: viewModel.genres,
+                                                    handler: { self.viewModel.categoriesMenuHandler(title: $0) })
     
+    private let viewModel = MovieListViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Movies"
         
         viewModel.output = self
-
         configure()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
+    }
+    
     private func configure() {
+        navigationItem.searchController = searchController
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: Constants.UIConstants.categoryMenuImage),
+                                                            menu: categoriesMenu)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = Constants.UIConstants.movieListTitle
+        
         view.addSubview(tableView)
         tableView.pin(to: view)
-        navigationItem.searchController = searchController
     }
 }
 
@@ -57,7 +66,6 @@ extension MovieListViewController {
     }
 }
 
-// MARK: Conform UISearchController methods
 extension MovieListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
@@ -65,24 +73,25 @@ extension MovieListViewController: UISearchResultsUpdating {
     }
 }
 
-// MARK: Conform MovieListOutput methods
 extension MovieListViewController: MovieListOutput {
     func refresh() {
         tableView.reloadData()
     }
 }
 
-// MARK: Conform UITableView delegate methods
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MovieListCell else { return MovieListCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIConstants.movieListCellID,
+                                                       for: indexPath) as? MovieListCell
+                                                       else { return MovieListCell() }
         
         cell.setMovie(movie: viewModel.movieForCell(filterStatus: isFiltering,
                                                     section: indexPath.section,
                                                     index: indexPath.row))
-        cell.bookmarkButtonAction = {
-            self.viewModel.bookmarkButtonAction(section: indexPath.section, index: indexPath.row)
-        }
+        
+        cell.bookmarkAction = { self.viewModel.bookmarkButtonAction(filterStatus: self.isFiltering,
+                                                                          section: indexPath.section,
+                                                                          index: indexPath.row) }
         return cell
     }
     
@@ -96,5 +105,10 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.titleForHeaderInSection(filterStatus: isFiltering, section: section)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = MovieDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

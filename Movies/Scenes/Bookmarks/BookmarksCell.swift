@@ -9,18 +9,30 @@ import UIKit
 
 class BookmarksCell: UITableViewCell {
 
+    private let movieTitleLabel: UILabel = .init(font: UIFont.boldSystemFont(ofSize: 24), lines: 4)
+    private let movieRateLabel: UILabel = .init()
+    private let movieDescriptionLabel: UILabel = .init(font: UIFont.systemFont(ofSize: 16), textColor: .lightGray, lines: 5)
     
-    private let movieTitleLabel = UILabel()
-    private let movieRateLabel = UILabel()
-    private let movieDescriptionLabel = UILabel()
-    private let movieImage = UIImageView()
-    private let starImage = UIImageView(image: UIImage(named: "Star"))
+    private let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        return stack
+    }()
+    
+    private let movieImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 15
+        return imageView
+    }()
+    private let starImage = UIImageView(image: UIImage(named: Constants.UIConstants.starImage))
     
     private var movie: Movie?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         configure()
         makeAllConstraints()
     }
@@ -29,36 +41,13 @@ class BookmarksCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setMovie(movie: Movie?) {
-        guard let movie = movie else { return }
-
-        self.movie = movie
-        
-        movieTitleLabel.text = movie.title
-        movieRateLabel.text = "\(movie.rate)/10"
-        movieDescriptionLabel.text = movie.overview
-    }
-    
     private func configure() {
-        
         addSubview(movieTitleLabel)
         addSubview(movieRateLabel)
         addSubview(movieImage)
         addSubview(movieDescriptionLabel)
         addSubview(starImage)
-        
-        movieTitleLabel.lineBreakMode = .byTruncatingTail
-        movieTitleLabel.numberOfLines = 4
-        movieTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        
-        movieImage.image = UIImage(named: "Movie")
-        movieImage.layer.cornerRadius = 15
-        movieImage.clipsToBounds = true
-        
-        movieDescriptionLabel.lineBreakMode = .byTruncatingTail
-        movieDescriptionLabel.numberOfLines = 5
-        movieDescriptionLabel.textColor = .lightGray
-        movieDescriptionLabel.font = UIFont.systemFont(ofSize: 16)
+        addSubview(stackView)
     }
     
     private func makeAllConstraints() {
@@ -76,22 +65,39 @@ class BookmarksCell: UITableViewCell {
         }
         
         starImage.snp.makeConstraints {
-            $0.top.equalTo(movieTitleLabel.snp.bottom).offset(16)
+            $0.top.equalTo(movieTitleLabel.snp.bottom).offset(12)
             $0.leading.equalTo(movieImage.snp.trailing).offset(16)
             $0.size.equalTo(18)
         }
         
         movieRateLabel.snp.makeConstraints {
-            $0.top.equalTo(movieTitleLabel.snp.bottom).offset(16)
+            $0.top.equalTo(movieTitleLabel.snp.bottom).offset(12)
             $0.leading.equalTo(starImage.snp.trailing).offset(4)
             $0.trailing.equalTo(-16)
         }
         
+        stackView.snp.makeConstraints {
+            $0.top.equalTo(movieRateLabel.snp.bottom).offset(12)
+            $0.leading.equalTo(movieImage.snp.trailing).offset(16)
+            $0.height.equalTo(24)
+        }
+        
         movieDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(movieRateLabel.snp.bottom).offset(16)
+            $0.top.equalTo(stackView.snp.bottom).offset(8)
             $0.leading.equalTo(movieImage.snp.trailing).offset(16)
             $0.trailing.equalTo(-16)
         }
     }
     
+    func setMovie(movie: Movie?) {
+        guard let movie = movie else { return }
+
+        self.movie = movie
+        
+        movieTitleLabel.text = movie.title
+        movieRateLabel.text = "\(movie.rate)/10"
+        movieDescriptionLabel.text = movie.overview
+        movieImage.kf.setImage(with: URL(string: Constants.APIConstants.baseImageURL + movie.posterImage))
+        stackView.addMultipleSubviews(views: GenreLabel.arrayOfLabels(for: movie.getGenreNames(), upTo: 2))
+    }
 }

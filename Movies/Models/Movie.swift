@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Codable, Hashable {
+struct Movie: Codable {
     
     let id: Int
     let title: String
@@ -26,5 +26,16 @@ struct Movie: Codable, Hashable {
         case posterImage = "poster_path"
         case backdropImage = "backdrop_path"
         case genres = "genre_ids"
+    }
+}
+
+extension Movie {
+    func getGenreNames() -> [String] {
+        let genreDict: [Int: String] = AppManager.shared.genres.reduce(into: [Int: String]()) { $0[$1.id] = $1.name }
+        var genreNames = [String]()
+        for genre in genres {
+            genreNames += [(genreDict[genre] ?? "All")]
+        }
+        return genreNames
     }
 }

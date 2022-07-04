@@ -8,13 +8,29 @@
 import Foundation
 
 final class BookmarksViewModel {
-    private(set) var favouriteMovies = [Movie]()
+    private(set) var bookmarkedMovies = [Movie]()
+    private let endpoints = MovieListEndpoint.allCases
+    private let bookmarkService = BookmarkService.shared
     
-    init() {
-        getMoviesFromUserDefaults()
-    }
+    weak var input: BookmarksInput?
+    weak var output: BookmarksOutput?
+    
+    init() { input = self }
     
     func getMoviesFromUserDefaults() {
-        favouriteMovies = UserDefaultsManager.shared.get(key: Constants.UserDefaultConstants.favouritesKey)
+        bookmarkedMovies = bookmarkService.getBookmarkedMovies()
+    }
+    
+    func deleteBookmarkedMovie(index: Int) {
+        let movie = bookmarkedMovies[index]
+        bookmarkedMovies = bookmarkedMovies.filter( { $0.id != movie.id } )
+        bookmarkService.setBookmarkedMovies(movies: bookmarkedMovies)
+    }
+}
+
+extension BookmarksViewModel: BookmarksInput {
+    func viewWillAppear() {
+        getMoviesFromUserDefaults()
+        output?.refresh()
     }
 }
