@@ -1,5 +1,3 @@
-# Movies-App
-
 # **Movies-App**
 - A four-paged movie list app
 - The first appearing screen is the splash screen
